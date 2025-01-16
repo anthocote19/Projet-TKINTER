@@ -1,57 +1,55 @@
-1 - Les règles du jeu
-Deux joueurs s’affrontent sur un plateau carré comportant n
-lignes et n
-colonnes, où n est un entier pair.
-Par défaut n=8
+1 - Rules of the game
+Two players face each other on a square board with n
+rows and n
+columns, where n is an even integer.
+By default n=8
 
-Chaque joueur dispose de deux types de pièces :
+Each player has two types of pieces:
 
-Une reine qui se déplace orthogonalement ou en diagonale vers une case vide non nécessairement adjacente, mais à la condition que toutes les cases alignées entre sa position de départ et sa position d'arrivée soient vides (à l'instar d'une reine aux échecs mais sans la possibilité de prendre une éventuelle pièce adverse se situant sur la case d'arrivée).
-Une tour qui se déplace orthogonalement vers une case vide non nécessairement adjacente, mais à la condition que toutes les cases alignées entre sa position de départ et sa position d'arrivée soient vides (à l'instar d'une tour aux échecs mais sans la possibilité de prendre une éventuelle pièce adverse se situant sur la case d'arrivée).
-Chaque joueur possède initialement une reine et n2//4−1
- tours disposées initialement comme suit (le premier joueur a ici les pièces de couleur bleue et mauve et le second de couleur rouge et orange) :
+A queen that moves orthogonally or diagonally to an empty square that is not necessarily adjacent, but on the condition that all the squares aligned between its starting position and its arrival position are empty (like a queen in chess but without the possibility of taking a possible opposing piece located on the arrival square).
+A rook that moves orthogonally to an empty square that is not necessarily adjacent, but on the condition that all the squares aligned between its starting position and its arrival position are empty (like a rook in chess but without the possibility of taking a possible opposing piece located on the arrival square).
+Each player initially has a queen and n2//4−1
+rooks initially arranged as follows (the first player here has the blue and purple pieces and the second player has the red and orange pieces):
 
-Exemple de déplacement suite à la configuration initiale précédente, le premier joueur bouge l'une de ses tours après l'avoir sélectionnée :
+Example of movement following the previous initial configuration, the first player moves one of his rooks after selecting it:
 
-Après qu'un joueur ait déplacé l'une de ses tours selon les règles ci-dessus, des captures sont possibles. Si la position finale de la tour en question n'est ni sur la même ligne ni sur la même colonne que la reine du même joueur, ces deux pièces forment alors deux sommets d'une même diagonale d'un rectangle virtuel. Si une ou deux tours du joueur adverse sont alors situées sur un ou deux des autres sommets de ce rectangle elles sont capturées.
+After a player has moved one of his rooks according to the rules above, captures are possible. If the final position of the rook in question is neither on the same line nor on the same column as the queen of the same player, these two pieces then form two vertices of the same diagonal of a virtual rectangle. If one or two rooks of the opposing player are then located on one or two of the other vertices of this rectangle, they are captured.
 
-Cette règle de capture ne s'applique qu'après le déplacement d'une tour et non d'une reine, et seules les tours adverses peuvent être capturées et non la reine adverse.
+This capture rule only applies after the movement of a rook and not of a queen, and only the opposing rooks can be captured and not the opposing queen.
 
-Exemple d'une prise avec le second joueur qui sélectionne sa tour située sur la quatrième ligne et sixième colonne, qui la déplace vers la septième ligne et sixième colonne ce qui capture la tour du premier joueur qui était située sur la septième ligne et huitième colonne :
+Example of a capture with the second player who selects his tower located on the fourth row and sixth column, who moves it to the seventh row and sixth column which captures the tower of the first player which was located on the seventh row and eighth column:
 
-Un peu plus tard dans la partie, exemple de déplacement en diagonal de la reine du second joueur :
+A little later in the game, example of diagonal movement of the queen of the second player:
 
-Dès qu'un joueur n'a plus que deux pièces ou moins (au cumul de sa reine et de ses tours) il a perdu la partie.
+As soon as a player has only two pieces or less (cumulative of his queen and his towers) he has lost the game.
 
-Exemple avec une victoire du second joueur :
+Example with a victory of the second player:
 
+2 - Implementation of this game in Python
+The use of the Tkinter graphics library is mandatory, any other choice will not be taken into account.
 
-2 - Implémentation de ce jeu en Python
-L'usage de la librairie graphique Tkinter est obligatoire, tout autre choix ne sera pas pris en compte.
+An object-oriented approach is mandatory and the encapsulation principle must be scrupulously respected. Otherwise the project will be directly rejected.
 
-Une approche orientée objet est obligatoire et le principe d'encapsulation devra être scrupuleusement respecté. Dans le cas contraire le projet sera directement recalé.
+You will implement at least two classes:
 
-Vous implémenterez au minimum deux classes :
+A "player" class with (at least) as attributes the coordinates of his queen on a board as well as its number of remaining pieces.
+A "game" class with several attributes to be determined, one of which will be a two-dimensional list modeling the game board.
+The design of the application is free (for example, we can choose the colors, the shapes of the pieces, etc.) but your program must at least include the following features:
 
-Une classe "joueur" avec (au moins) pour attributs les coordonnées de sa reine sur un plateau ainsi que son nombre de pièces restantes.
-Une classe "jeu" avec plusieurs attributs à déterminer dont l'un d'eux sera une liste à deux dimensions modélisant le plateau de jeu.
-Le design de l'application est libre (on pourra par exemple choisir les couleurs, les formes des pièces, etc.) mais votre programme devra au moins comporter les fonctionnalités suivantes :
+Choice of the size of the board via a menu, the number of rows and columns must be even and between 6 and 12.
+Display of the board (grid and pieces) and the player whose turn it is.
+At each turn of the game, selection with the mouse by the player whose turn it is of the piece he wishes to move (in accordance with the rules of the game, i.e. he will not be able to select an opponent's piece or one of his pieces that cannot move). We will visualize this selection by surrounding for example the piece in question with a circle (see screenshots of the first part of the subject).
+At each turn of the game, the player whose turn it is selects with the mouse the final position of the piece he has previously selected (in accordance with the rules of the game).
+Movement of pawns and possible captures.
+Management of game turns and alternation of players.
+Victory condition.
+Management of the end of the game (display of the result, proposal of a new game, etc.).
+Care will be taken to decouple as much as possible the algorithmic methods, i.e. those that interact with the data structure modeling the board, from the graphical methods that take care of the display and management of events.
 
-Choix de la dimension du plateau via un menu, le nombre de lignes et de colonnes devant être pair et compris entre 6 et 12.
-Affichage du plateau (quadrillage et pièces) et du joueur dont c'est le tour.
-À chaque tour de jeu, sélection à la souris par le joueur dont c'est le tour de la pièce qu'il souhaite déplacer (conformément aux règles du jeu, i.e. il ne pourra pas sélectionner une pièce de l'adversaire ou l'une de ses pièces ne pouvant se déplacer). On visualisera cette sélection en entourant par exemple la pièce en question par un cercle (voir captures d'écran de la première partie du sujet).
-À chaque tour de jeu, sélection à la souris par le joueur dont c'est le tour de la position finale de la pièce qu'il a précédemment sélectionnée (conformément aux règles du jeu).
-Déplacements des pions et captures éventuelles.
-Gestion des tours de jeu et de l'alternance des joueurs.
-Condition de victoire.
-Gestion de la fin de partie (affichage du résultat, proposition d'une nouvelle partie, etc.).
-On prendra soin de découpler au maximum les méthodes algorithmiques, i.e. celles qui interagissent avec la structure de données modélisant le plateau, des méthodes graphiques qui elles s'occupent de l'affichage et de la gestion des événements.
+3 - Bonuses
+The following bonuses are optional and therefore do not enter into the basic scale. They will bring additional points and the personal satisfaction of duty accomplished.
 
-
-3 - Bonus
-Les bonus suivants sont facultatifs et ne rentrent donc pas dans le barème de base. Ils apporteront des points supplémentaires et la satisfaction personnelle du devoir accompli.
-
-Prévisualisation des coups jouables.
-Sauvegarde d'une partie dans un fichier texte, et reprise de celle-ci ultérieurement.
-Animations visuelles et/ou sonores lors du déplacement des pions et des captures.
-Mode de jeu individuel contre l'ordinateur, celui-ci jouant de façon aléatoire (ou intelligemment).
+Preview of playable moves.
+Saving a game in a text file, and resuming it later.
+Visual and/or sound animations when moving pawns and captures.
+Individual game mode against the computer, which plays randomly (or intelligently).
